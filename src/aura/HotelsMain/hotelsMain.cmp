@@ -1,0 +1,7 @@
+<!--
+ - Created by vvalitsky on 11/12/2019.
+ -->
+
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId" description="HotelsMain" >
+    <c:main />
+</aura:component>

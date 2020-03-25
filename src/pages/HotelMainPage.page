@@ -1,0 +1,14 @@
+<apex:page showHeader="false">
+    <apex:includeLightning/>
+    <apex:slds/>
+    <div id="connectApp"></div>
+    <script>
+        $Lightning.use("c:HotelsApp", function () {
+            $Lightning.createComponent("c:HotelsMain",
+                {},
+                "connectApp",
+                function (_component) {
+                });
+        });
+    </script>
+</apex:page>

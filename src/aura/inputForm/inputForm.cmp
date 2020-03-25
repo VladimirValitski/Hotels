@@ -1,0 +1,60 @@
+<!--
+ - Created by vvalitsky on 12/24/2019.
+ -->
+
+<aura:component controller="HotelsController">
+
+    <aura:attribute name="dateCheckIn" type="Date" access="private"/>
+    <aura:attribute name="dateCheckOut" type="Date" access="private"/>
+    <aura:attribute name="countOfGuest" type="String" access="private"/>
+    <aura:attribute name="selectedCity" type="String" access="private"/>
+    <aura:attribute name="selectedHotel" type="String" access="private"/>
+    <aura:attribute name="availableHotels" type="List" default="[]" access="private"/>
+    <aura:attribute name="cities" type="List" default="[]" access="private"/>
+    <aura:attribute name="isValidDate" type="Boolean" default="false" access="private"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:registerEvent name="toasterEvent" type="c:toastEvent"/>
+    <aura:registerEvent name="inputDataEvent" type="c:inputFormEvent"/>
+
+    <lightning:input type="date"
+                     class="slds-p-horizontal--small"
+                     value="{!v.dateCheckIn}"
+                     onchange="{!c.checkDate}"
+                     label="{!$Label.c.EnterCheckInDate}"
+                     autocomplete="off"
+    />
+    <lightning:input type="date"
+                     class="slds-p-horizontal--small"
+                     value="{!v.dateCheckOut}"
+                     onchange="{!c.checkDate}"
+                     label="{!$Label.c.EnterCheckOutDate}"
+                     autocomplete="off"
+    />
+    <lightning:input type="number"
+                     class="slds-p-horizontal--small"
+                     value="{!v.countOfGuest}"
+                     label="{!$Label.c.EnterCountCfGuest}"
+                     min="1"
+                     max="10"
+                     autocomplete="off"
+    />
+    <lightning:combobox label="{!$Label.c.City}"
+                        class="slds-p-horizontal--small"
+                        options="{!v.cities}"
+                        onchange="{!c.getFilteredHotels}"
+                        placeholder="{!$Label.c.SelectCity}"
+    />
+    <lightning:combobox label="{!$Label.c.Hotel}"
+                        class="slds-p-horizontal--small"
+                        options="{!v.availableHotels}"
+                        onchange="{!c.setFilteredHotels}"
+                        placeholder="{!$Label.c.SelectHotel}"
+    />
+    <lightning:button variant="{!$Label.c.Button_Success}"
+                      label="{!$Label.c.FindRooms}"
+                      onclick="{!c.getFilteredRooms}"
+                      class="slds-m-around--small"
+    />
+</aura:component>

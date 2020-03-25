@@ -1,0 +1,23 @@
+<!--
+ - Created by vvalitsky on 12/26/2019.
+ -->
+
+<aura:component controller="HotelsController" description="additionalService">
+
+    <aura:attribute name="value" type="List" default="[]"/>
+    <aura:attribute name="options" type="Object[]"/>
+
+    <aura:registerEvent name="totalPriceEvent" type="c:totalPriceEvent"/>
+
+    <aura:if isTrue="{!not(empty(v.options))}">
+        <lightning:card title="{!$Label.c.AdditionalServices}">
+            <lightning:checkboxGroup name="{!$Label.c.AdditionalServices}"
+                                     label="{!$Label.c.AdditionalServices}"
+                                     options="{!v.options}"
+                                     value="{!v.value}"
+                                     onchange="{!c.handleChange}"
+                                     class="slds-p-around--small"
+            />
+        </lightning:card>
+    </aura:if>
+</aura:component>

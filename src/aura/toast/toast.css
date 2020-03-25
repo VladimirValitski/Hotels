@@ -1,0 +1,31 @@
+@keyframes example {
+    from {height: 0 rem;}
+    to {height: 5 rem;}
+}
+
+@keyframes animatetop {
+  from {top: -400px; opacity: 0}
+  to {top: 0; opacity: 1}
+}
+
+.THIS.modal {
+    height : 80px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+}
+
+.THIS .modal-content {
+    left: 0;
+    top: 0;
+    animation-name: example;
+    animation-duration: 4s;
+    position: relative;
+    margin: auto;
+    padding: 0;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+

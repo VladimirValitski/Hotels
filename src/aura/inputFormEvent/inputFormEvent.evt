@@ -1,0 +1,12 @@
+<!--
+ - Created by vvalitsky on 12/24/2019.
+ -->
+
+<aura:event type="COMPONENT" description="inputFormEvent">
+    <aura:attribute name="isVisibleTable" type="Boolean"/>
+    <aura:attribute name="dateIn" type="Date"/>
+    <aura:attribute name="dateOut" type="Date"/>
+    <aura:attribute name="countGuests" type="String"/>
+    <aura:attribute name="selectedCity" type="String"/>
+    <aura:attribute name="selectedHotel" type="String"/>
+</aura:event>

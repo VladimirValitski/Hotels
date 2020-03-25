@@ -1,0 +1,7 @@
+<!--
+ - Created by vvalitsky on 12/27/2019.
+ -->
+
+<aura:event type="COMPONENT" description="totalPriceEvent">
+    <aura:attribute name="totalPriceWithService" type="Decimal"/>
+</aura:event>

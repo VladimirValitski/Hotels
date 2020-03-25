@@ -1,0 +1,60 @@
+<!--
+ - Created by vvalitsky on 12/18/2019.
+ -->
+
+<aura:component>
+
+    <aura:attribute name="firstName" type="String" access="private"/>
+    <aura:attribute name="lastName" type="String" access="private"/>
+    <aura:attribute name="contactEmail" type="String" access="private"/>
+    <aura:attribute name="phone" type="String" access="private"/>
+
+    <aura:registerEvent name="contactFormHandlerEvent" type="c:contactFormEvent"/>
+    <aura:registerEvent name="toasterEvent" type="c:toastEvent"/>
+
+    <lightning:input type="text"
+                     class="slds-p-around--small"
+                     aura:id="first_name"
+                     value="{!v.firstName}"
+                     variant="label-hidden"
+                     placeholder="{!$Label.c.First_Name}"
+                     required="true"
+                     pattern="{!$Label.c.PatternName}"
+    />
+
+    <lightning:input type="text"
+                     class="slds-p-around--small"
+                     aura:id="last_name"
+                     value="{!v.lastName}"
+                     variant="label-hidden"
+                     placeholder="{!$Label.c.Last_Name}"
+                     required="true"
+                     pattern="{!$Label.c.PatternName}"
+    />
+
+    <lightning:input type="email"
+                     class="slds-p-around--small"
+                     aura:id="contact_email"
+                     value="{!v.contactEmail}"
+                     variant="label-hidden"
+                     placeholder="{!$Label.c.Email}"
+                     required="true"
+                     pattern="{!$Label.c.PatternEmail}"
+    />
+
+    <lightning:input type="tel"
+                     class="slds-p-around--small"
+                     aura:id="contact_phone"
+                     value="{!v.phone}"
+                     variant="label-hidden"
+                     placeholder="{!$Label.c.Phone}"
+                     required="true"
+                     pattern="{!$Label.c.PatternPhone}"
+    />
+
+    <lightning:button variant="{!$Label.c.Button_Success}"
+                      label="{!$Label.c.Register}"
+                      onclick="{!c.registerRoomAndContact}"
+                      class="slds-m-around--small"
+    />
+</aura:component>

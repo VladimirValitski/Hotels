@@ -1,0 +1,10 @@
+<!--
+ - Created by vvalitsky on 12/26/2019.
+ -->
+
+<aura:event type="COMPONENT" description="contactFormEvent">
+    <aura:attribute name="fistName" type="String"/>
+    <aura:attribute name="lastName" type="String"/>
+    <aura:attribute name="email" type="String"/>
+    <aura:attribute name="phone" type="String"/>
+</aura:event>

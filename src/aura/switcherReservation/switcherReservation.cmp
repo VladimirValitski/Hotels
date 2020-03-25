@@ -1,0 +1,31 @@
+<!--
+ - Created by vvalitsky on 11/29/2019.
+ -->
+
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,
+force:hasRecordId, force:lightningQuickAction" description="switcherReservation" access="global"
+                controller="SwitcherController">
+
+    <aura:attribute name="status" type="String" />
+    <aura:attribute name="isVisible" type="Boolean" default="false"/>
+
+    <aura:handler name="init" value="this" action="{!c.doInit}"/>
+
+    <aura:if isTrue="{!v.isVisible}">
+        <div class="demo-only" style="height:4rem">
+            <div class="slds-notify_container slds-is-relative">
+                <div class="slds-notify slds-notify_toast slds-theme_success" role="status">
+                    <span class="slds-assistive-text">
+                        {!v.status == $Label.c.Success ? $Label.c.Success : $Label.c.Error}
+                    </span>
+                    <div class="slds-notify__content">
+                        <h2 class="slds-text-heading_small ">
+                            {!v.status == 'success' ? $Label.c.SwitcherStatusOK : $Label.c.SwitcherStatusBad}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aura:if>
+
+</aura:component>

@@ -1,0 +1,76 @@
+<!--
+ - Created by vvalitsky on 12/24/2019.
+ -->
+
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,
+force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global"
+                description="main" controller="HotelsController">
+
+    <aura:attribute name="isBusy" type="Boolean" default="false" access="private"/>
+
+    <aura:attribute name="inputData" type="Object" access="private"/>
+    <aura:attribute name="filteredRooms" type="List" access="private"/>
+    <aura:attribute name="columns" type="List" access="private"/>
+    <aura:attribute name="options" type="Object[]" access="private"/>
+    <aura:attribute name="selectedRoom" type="Object" access="private"/>
+    <aura:attribute name="maxRowSelection" type="Integer" default="1" access="private"/>
+    <aura:attribute name="totalPriceWithServices" type="Decimal" default="0" access="private"/>
+
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <aura:handler name="inputDataEvent" event="c:inputFormEvent" action="{!c.handleInputFormEvent}"/>
+    <aura:handler name="toasterEvent" event="c:toastEvent" action="{!c.handleToastEvent}"/>
+    <aura:handler name="totalPriceEvent" event="c:totalPriceEvent" action="{!c.handleTotalPriceEvent}"/>
+    <aura:handler name="contactFormHandlerEvent" event="c:contactFormEvent" action="{!c.handleContactFormEvent}"/>
+
+    <aura:if isTrue="{!v.isBusy}">
+        <lightning:spinner
+                variant="brand"
+                alternativeText="Loading"
+                size="large"
+                class="slds-align--absolute-center"
+        />
+    </aura:if>
+
+    <div class="main_toast">
+        <c:toast aura:id="toast"/>
+    </div>
+
+    <lightning:layout>
+        <lightning:layoutItem size="3" padding="around-medium">
+            <lightning:card title="{!$Label.c.Filter}">
+                <c:inputForm/>
+            </lightning:card>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="6" padding="around-medium">
+            <aura:if isTrue="{!not(empty(v.filteredRooms))}">
+                <lightning:card title="{!$Label.c.AvailableRooms}">
+                    <lightning:datatable columns="{!v.columns}"
+                                         data="{!v.filteredRooms}"
+                                         keyField="roomId"
+                                         maxRowSelection="{!v.maxRowSelection}"
+                                         onrowselection="{!c.showPriceForm}"
+                                         class="slds-p-around--small"
+                    />
+                </lightning:card>
+            </aura:if>
+        </lightning:layoutItem>
+        <aura:if isTrue="{!v.selectedRoom}">
+            <lightning:layoutItem size="3" padding="around-medium">
+                <c:additionalService options="{!v.options}"/>
+                <lightning:card title="{!$Label.c.TotalPrice_brief}">
+                    <lightning:formattedText value="{!join(' ', $Label.c.PriceForRoom, v.selectedRoom.roomPrice, '$') }"
+                                             class="slds-grid slds-grid_vertical slds-p-around--small"/>
+                    <lightning:formattedText
+                            value="{!join(' ', $Label.c.TotalPrice, v.selectedRoom.roomPrice +
+                            v.totalPriceWithServices, '$')}"
+                            class="slds-grid slds-grid_vertical slds-p-around--small"/>
+                </lightning:card>
+                <lightning:card title="{!$Label.c.ContactData}">
+                    <c:contactForm/>
+                </lightning:card>
+            </lightning:layoutItem>
+        </aura:if>
+    </lightning:layout>
+
+</aura:component>
